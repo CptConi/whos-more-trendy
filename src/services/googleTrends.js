@@ -3,9 +3,9 @@ const localTest = new URL("http://localhost:3001/");
 
 export default {
 	async compare(Vue) {
-		Vue.loaded = false;
 		try {
-			let result = await Vue.$http.get(localTest + `${Vue.keyword}/${Vue.keyword2}`);
+			
+			let result = await Vue.$http.get(localTest + `${Vue.keyword}/${Vue.keyword2}/${Vue.period}`);
 			Vue.dates = result.data.data.map((data) => data.date);
 			Vue.trendsData = [
 				result.data.data.map((data) => data.keyword1),
