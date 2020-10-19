@@ -25,13 +25,21 @@
             <div class="range__periode">{{ datepickerText }}</div>
             <input class="range__datepicker" type="range" min="1" max="7" step="1" id="datepicker" value="1" v-model="datepickerValue" />
         </div>
-
-        <button class="search__button" @click.prevent="compareTerms">Who's more Trendy ?</button>
+        <div class="error-message" v-if="error.showError">
+            {{ error.errorMessage }}
+        </div>
+        <transition name="load">
+            <button class="search__button" @click.prevent="compareTerms" v-if="!chart.loading">Who's more Trendy ?</button>
+            <button class="search__button--loading" @click.prevent="compareTerms" v-else>
+                <i class="fa fa-circle-o-notch fa-spin"></i>
+            </button>
+        </transition>
     </form>
 </template>
 
 <script>
 import googleTrends from '../services/googleTrends';
+import Utils from '../services/utils';
 import { mapActions } from 'vuex';
 export default {
     name: 'formTrends',
@@ -64,6 +72,16 @@ export default {
             },
             set(value) {
                 this.$store.commit('SET_PERIOD', value);
+            },
+        },
+        error: {
+            get() {
+                return this.$store.state.error;
+            },
+        },
+        chart: {
+            get() {
+                return this.$store.state.chart;
             },
         },
     },
@@ -106,10 +124,11 @@ export default {
         },
     },
     methods: {
-        ...mapActions(['setTrendsData', 'setLoaded', 'setErrorMessage', 'setShowErrorMessage', 'setDates']),
+        ...mapActions(['setTrendsData', 'setLoaded', 'setErrorMessage', 'setShowErrorMessage', 'setDates', 'setAverages', 'setLoading']),
+
         compareTerms() {
             if (this.keyword1 && this.keyword2) {
-                console.log('CompareTerms se lance ...');
+                this.setLoading(true);
                 this.setLoaded(false);
                 this.setShowErrorMessage(false);
                 googleTrends.compare(this);
@@ -117,6 +136,12 @@ export default {
                 this.setErrorMessage('Veuillez rentrer deux termes clés valides');
                 this.setShowErrorMessage(true);
             }
+        },
+        getAverage(pArray) {
+            return Utils.average(pArray);
+        },
+        setKeywordsAverage(pArray1, pArray2) {
+            this.setAverages({ avg1: this.getAverage(pArray1), avg2: this.getAverage(pArray2) });
         },
     },
     mounted() {
@@ -127,6 +152,7 @@ export default {
     },
 };
 </script>
+
 <style lang="scss">
 form {
     margin: 20px auto;
@@ -266,11 +292,25 @@ form {
         transform: perspective(200px) translate3d(0, 30%, 60px) rotate(-3deg);
         transform-origin: center;
         @media (max-width: 650px) {
-        transform: perspective(200px) translate3d(0, 30%, 50px) rotate(-3deg);
+            transform: perspective(200px) translate3d(0, 30%, 50px) rotate(-3deg);
+        }
+        @media (max-width: 450px) {
+            transform: perspective(200px) translate3d(0, 20%, 30px) rotate(-3deg);
+        }
     }
-    @media (max-width: 450px) {
-        transform: perspective(200px) translate3d(0, 20%, 30px) rotate(-3deg);
-    }
+    &--loading {
+        transform: translateY(50%);
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+        color: #f1f1f1;
+        background-color: #47498a;
+        font-size: 25px;
+        transition: transform 0.3s ease;
     }
     @media (max-width: 650px) {
         width: 240px;
