@@ -10,6 +10,7 @@ export default new Vuex.Store({
 		period: "",
 		chart: {
 			trendsData: "",
+			dates:'',
 			loaded: false,
 		},
 		error: {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
 		},
 		SET_TRENDS_DATA(state, data) {
 			state.chart.trendsData = data;
+		},
+		SET_DATES(state, pDate) {
+			state.chart.dates = pDate;
 		},
 		SET_LOADED(state, bool) {
 			state.chart.loaded = bool;
@@ -52,6 +56,9 @@ export default new Vuex.Store({
 		},
 		setTrendsData(context, data) {
 			context.commit("SET_TRENDS_DATA", data);
+		},
+		setDates(context, pDates) {
+			context.commit('SET_DATES', pDates);
 		},
 		setLoaded(context, bool) {
 			context.commit("SET_LOADED", bool);
