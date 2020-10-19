@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="container">
-            <h1 class="main-title">Who's More Trendy ??</h1>
+            <h1 class="main-title">Who's More Trendy ?</h1>
             <FormTrends></FormTrends>
             <div class="error-message" v-if="error.showError">
                 {{ error.errorMessage }}
@@ -39,25 +39,30 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 .main-title {
-    font-family: 'Permanent Marker', sans-serif;
+    font-family: 'Pacifico', cursive;
     font-size: 70px;
-    color: white;
-    text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000;
-    transform: rotate(-3deg);
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.4));
+    color: Black;
+    filter: drop-shadow(0 0 3px 3px white);
+    font-weight: 200;
+    transform: translateY(30px);
+    
   @media(max-width: 900px){
         font-size: 50px;
         margin-top: 15px;
 
     }
     @media(max-width: 650px){
-        font-size: 36px;
+        font-size: 38px;
         margin-top: 25px;
+        transform: translateY(28px);
     }
     @media (max-width: 450px) {
-        font-size: 26px;
+        font-size: 32px;
+        transform: translateY(25px);
     }
 
 }

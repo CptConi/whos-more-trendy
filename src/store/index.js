@@ -17,6 +17,14 @@ export default new Vuex.Store({
 			message: "",
 			show: false,
 		},
+		score: {
+			red: 0,
+			blue: 0
+		},
+		average: {
+			kw1: '',
+			kw2:''
+		}
 	},
 	mutations: {
 		SET_KEYWORD1(state, kw) {

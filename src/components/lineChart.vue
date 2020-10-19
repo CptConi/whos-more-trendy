@@ -36,6 +36,7 @@ export default {
                         {
                             ticks: {
                                 beginAtZero: true,
+                                display: false
                             },
                             gridLines: {
                                 display: true,
