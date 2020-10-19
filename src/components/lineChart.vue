@@ -15,13 +15,15 @@ export default {
     computed: {
         keyword1: {
             get() {
-				let kw = this.$store.state.keyword1
+                // Capitalize keyword
+                let kw = this.$store.state.keyword1;
                 return kw.charAt(0).toUpperCase() + kw.slice(1);
             },
         },
         keyword2: {
             get() {
-                let kw = this.$store.state.keyword2
+                // Capitalize keyword
+                let kw = this.$store.state.keyword2;
                 return kw.charAt(0).toUpperCase() + kw.slice(1);
             },
         },
@@ -65,17 +67,17 @@ export default {
                     {
                         label: this.keyword1,
                         borderColor: '#f44336',
-                        // borderWidth: 1,
+                        borderWidth: 3,
                         pointBorderColor: '#f44336',
-                        backgroundColor: '#f44336',
+                        backgroundColor: '#e57373',
                         data: this.chartData[0],
                     },
                     {
                         label: this.keyword2,
                         borderColor: '#2196F3',
-                        borderWidth: 2,
+                        borderWidth: 3,
                         pointBorderColor: '#2196F3',
-                        backgroundColor: '#2196F3',
+                        backgroundColor: '#64B5F6',
                         data: this.chartData[1],
                     },
                     // {

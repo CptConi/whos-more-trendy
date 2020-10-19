@@ -20,14 +20,13 @@
                 v-model="keyword2"
             />
         </div>
-        <div class="range-container">
-            <label for="datepicker">Période de recherche:</label>
-            <input class="datepicker" type="range" min="1" max="7" step="1" id="datepicker" value="1" v-model="datepickerValue" />
-            <div>{{ datepickerText }}</div>
+        <div class="range__container">
+            <label for="datepicker" class="range__title">Période de recherche:</label>
+            <div class="range__periode">{{ datepickerText }}</div>
+            <input class="range__datepicker" type="range" min="1" max="7" step="1" id="datepicker" value="1" v-model="datepickerValue" />
         </div>
-        
 
-        <button class="Search__button" @click.prevent="compareTerms">Who's more Trendy ?</button>
+        <button class="search__button" @click.prevent="compareTerms">Who's more Trendy ?</button>
     </form>
 </template>
 
@@ -122,24 +121,38 @@ export default {
     },
     mounted() {
         this.$store.commit('SET_PERIOD', this.$moment().subtract(10, 'days')._d);
+        let focus = document.querySelector('.search__input');
+        focus.focus();
+        focus.select();
     },
 };
 </script>
 <style lang="scss">
-.range-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    & .datepicker {
-        width: 75%;
+form {
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #546e7a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1100px;
+    @media (max-width: 1200px) {
+        width: 800px;
+    }
+    @media (max-width: 900px) {
+        width: 600px;
+    }
+    @media (max-width: 650px) {
+        width: 420px;
+    }
+    @media (max-width: 450px) {
+        width: 300px;
     }
 }
 
 .input-container {
     margin: 30px 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     & .search__input {
         width: 40%;
@@ -152,26 +165,121 @@ export default {
         text-transform: capitalize;
         font-size: 22px;
         color: #f5f5f5;
+        &::-webkit-search-cancel-button {
+            position: relative;
+            right: 20px;
+            cursor: pointer;
+        }
         &:nth-child(1) {
-            margin-left: 50px;
+            margin-right: 2%;
             background-color: #f44336;
             &::placeholder {
                 color: #ddd;
                 font-size: 22px;
             }
-            &:focus,
-            ::placeholder {
-                content: '';
+            &:focus {
+                box-shadow: 0 0 20px #f44336;
+            }
+            @media (max-width: 650px) {
+                margin: auto;
+                width: 380px;
+                margin-bottom: 8px;
+            }
+            @media (max-width: 450px) {
+                width: 270px;
             }
         }
         &:nth-child(2) {
-            margin-right: 50px;
+            margin-left: 2%;
             background-color: #2196f3;
             &::placeholder {
                 color: #ddd;
                 font-size: 22px;
             }
+            &:focus {
+                box-shadow: 0 0 20px #2196f3;
+            }
+            @media (max-width: 650px) {
+                margin: auto;
+                width: 380px;
+            }
+            @media (max-width: 450px) {
+                width: 270px;
+            }
         }
+    }
+    @media (max-width: 650px) {
+        flex-direction: column;
+    }
+}
+
+.range {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 10px;
+        margin: 30px 110px 10px;
+        border-radius: 12px;
+        background: linear-gradient(145deg, #4c636e, #5a7683);
+        box-shadow: 10px 10px 30px #475e68, -10px -10px 30px #617f8c;
+        @media (max-width: 650px) {
+            margin: 30px 40px 10px;
+        }
+        @media (max-width: 450px) {
+            margin: 30px 25px 10px;
+        }
+    }
+    &__title {
+        margin: 10px 0 5px;
+        font-size: 18px;
+        color: #f1f1f1;
+    }
+    &__datepicker {
+        width: 75%;
+        cursor: pointer;
+        background-color: transparent;
+    }
+    &__periode {
+        font-size: 14px;
+        margin-bottom: 15px;
+        color: #ccc;
+    }
+}
+
+.search__button {
+    transform: translateY(50%);
+    width: 350px;
+    height: 60px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    color: #f1f1f1;
+    background-color: #47498a;
+    font-size: 25px;
+    text-transform: capitalize;
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: perspective(200px) translate3d(0, 30%, 60px) rotate(-3deg);
+        transform-origin: center;
+        @media (max-width: 650px) {
+        transform: perspective(200px) translate3d(0, 30%, 50px) rotate(-3deg);
+    }
+    @media (max-width: 450px) {
+        transform: perspective(200px) translate3d(0, 20%, 30px) rotate(-3deg);
+    }
+    }
+    @media (max-width: 650px) {
+        width: 240px;
+        height: 50px;
+        font-size: 20px;
+    }
+    @media (max-width: 450px) {
+        width: 200px;
+        font-size: 18px;
     }
 }
 </style>

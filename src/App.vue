@@ -18,7 +18,9 @@ html {
 }
 
 body{
-    background-color: #F1F1F1;
+    background-color: #EEE;
+      overflow-x: hidden; 
+    overflow-y: hidden; 
 }
 
 #app {
