@@ -13,12 +13,12 @@
                 </div>
             </div>
             <div class="average__container" v-if="chart.loaded">
-                <div class="average__circle average__circle--red">
+                <div class="average__circle average__circle--red" :class="kw1AvgAnim">
                     <div class="average__value average__value--red">
                         <ICountUp :delay="delay" :endVal="averages.kw1" :options="options" @ready="onReadyRed" />
                     </div>
                 </div>
-                <div class="average__circle average__circle--blue">
+                <div class="average__circle average__circle--blue" :class="kw2AvgAnim">
                     <div class="average__value average__value--blue">
                         <ICountUp :delay="delay" :endVal="averages.kw2" :options="options" @ready="onReadyBlue" />
                     </div>
@@ -32,7 +32,7 @@
 import lineChart from '../components/lineChart';
 import FormTrends from '../components/formTrends';
 import ICountUp from 'vue-countup-v2';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
     name: 'Home',
     components: { lineChart, FormTrends, ICountUp },
@@ -41,14 +41,29 @@ export default {
             delay: 1000,
             options: {
                 useEasing: true,
-                duration: 6,
+                duration: 5,
             },
         };
     },
     computed: {
-        ...mapState(['chart', 'error', 'keyword1', 'keyword2', 'score', 'averages']),
+        ...mapState(['chart', 'error', 'keyword1', 'keyword2', 'score', 'averages', 'winner']),
+        kw1AvgAnim() {
+            let anim = 'none';
+            if (this.winner === 'red') {
+                anim = 'winner--red';
+            }
+            return anim;
+        },
+        kw2AvgAnim() {
+            let anim = 'none';
+            if (this.winner === 'blue') {
+                anim = 'winner--blue';
+            }
+            return anim;
+        },
     },
     methods: {
+        ...mapActions(['setScore', 'setWinner']),
         onReadyRed(instance) {
             instance.start(this.addScore);
         },
@@ -56,12 +71,17 @@ export default {
             instance.start();
         },
         addScore() {
-            let team;
-            this.averages.kw1 > this.averages.kw2 ? (team = 'red') : (team = 'blue');
-            if (team === 'red') {
-                console.log('+1 pour les rouges');
-            } else if (team === 'blue') {
-                console.log('+1 pour les bleus');
+            // Red team wins
+            if (this.averages.kw1 > this.averages.kw2) {
+                console.log(`Red Team wins ${this.averages.kw1 - this.averages.kw2} points`);
+                this.setWinner('red');
+                // Blue team wins
+            } else if (this.averages.kw1 < this.averages.kw2) {
+                console.log(`Blue Team wins ${this.averages.kw2 - this.averages.kw1} points`);
+                this.setWinner('blue');
+                // Draw
+            } else if (this.averages.kw1 == this.averages.kw2) {
+                console.log('Egalité parfaite !');
             }
         },
     },
@@ -138,14 +158,33 @@ $blueTeam: #2196f3;
         font-family: 'Pacifico', sans-serif;
         &--red {
             background-color: $redTeam;
+            box-shadow: 0 0 0 1px $redTeam;
         }
         &--blue {
             background-color: $blueTeam;
+            box-shadow: 0 0 0 1px $blueTeam;
         }
     }
     &__value {
         font-size: 40px;
         transform: translateY(-7%);
+    }
+}
+.winner--red {
+    animation: pulse-red 1.4s ease-out infinite;
+}
+.winner--blue {
+    animation: pulse-blue 1.4s ease-out infinite;
+}
+
+@keyframes pulse-red {
+    to {
+        box-shadow: 0 0 0 8px rgba(244, 67, 54, 0.01);
+    }
+}
+@keyframes pulse-blue {
+    to {
+        box-shadow: 0 0 0 8px rgba(33, 150, 243, 0.01);
     }
 }
 </style>

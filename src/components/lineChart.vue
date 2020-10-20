@@ -45,6 +45,9 @@ export default {
                     ],
                     xAxes: [
                         {
+                            ticks: {
+                                display: false
+                            },
                             gridLines: {
                                 display: false,
                             },
@@ -70,7 +73,7 @@ export default {
                         borderColor: '#f44336',
                         borderWidth: 3,
                         pointBorderColor: '#f44336',
-                        backgroundColor: '#e57373',
+                        backgroundColor: 'rgba(244, 67, 54, 0.5)',
                         data: this.chartData[0],
                     },
                     {
@@ -78,7 +81,7 @@ export default {
                         borderColor: '#2196F3',
                         borderWidth: 3,
                         pointBorderColor: '#2196F3',
-                        backgroundColor: '#64B5F6',
+                        backgroundColor: 'rgba(33, 150, 243, 0.5)',
                         data: this.chartData[1],
                     },
                     // {

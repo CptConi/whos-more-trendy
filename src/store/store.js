@@ -26,6 +26,7 @@ export default new Vuex.Store({
             kw1: '',
             kw2: '',
         },
+        winner: '',
     },
     mutations: {
         SET_KEYWORD1(state, kw) {
@@ -59,6 +60,9 @@ export default new Vuex.Store({
             state.averages.kw1 = pAverages.avg1;
             state.averages.kw2 = pAverages.avg2;
         },
+        SET_WINNER(state, pString) {
+            state.winner = pString;
+        },
     },
     actions: {
         setKeyword1(context, kw) {
@@ -90,6 +94,9 @@ export default new Vuex.Store({
         },
         setAverages(context, pAverages) {
             context.commit('SET_AVERAGES', pAverages);
+        },
+        setWinner(context, pWinner) {
+            context.commit('SET_WINNER', pWinner);
         },
     },
     modules: {},

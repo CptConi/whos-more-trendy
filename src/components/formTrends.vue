@@ -30,7 +30,7 @@
         </div>
         <transition name="load">
             <button class="search__button" @click.prevent="compareTerms" v-if="!chart.loading">Who's more Trendy ?</button>
-            <button class="search__button--loading" @click.prevent="compareTerms" v-else>
+            <button class="search__button--loading" v-else>
                 <i class="fa fa-circle-o-notch fa-spin"></i>
             </button>
         </transition>
@@ -84,6 +84,11 @@ export default {
                 return this.$store.state.chart;
             },
         },
+        winner: {
+            get() {
+                return this.$store.state.winner;
+            },
+        },
     },
     watch: {
         datepickerValue() {
@@ -124,13 +129,23 @@ export default {
         },
     },
     methods: {
-        ...mapActions(['setTrendsData', 'setLoaded', 'setErrorMessage', 'setShowErrorMessage', 'setDates', 'setAverages', 'setLoading']),
+        ...mapActions([
+            'setTrendsData',
+            'setLoaded',
+            'setErrorMessage',
+            'setShowErrorMessage',
+            'setDates',
+            'setAverages',
+            'setLoading',
+            'setWinner',
+        ]),
 
         compareTerms() {
             if (this.keyword1 && this.keyword2) {
                 this.setLoading(true);
                 this.setLoaded(false);
                 this.setShowErrorMessage(false);
+                this.resetAnimations();
                 googleTrends.compare(this);
             } else {
                 this.setErrorMessage('Veuillez rentrer deux termes clés valides');
@@ -142,6 +157,9 @@ export default {
         },
         setKeywordsAverage(pArray1, pArray2) {
             this.setAverages({ avg1: this.getAverage(pArray1), avg2: this.getAverage(pArray2) });
+        },
+        resetAnimations() {
+            this.setWinner('');
         },
     },
     mounted() {
