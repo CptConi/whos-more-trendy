@@ -305,15 +305,16 @@ form {
     background-color: #47498a;
     font-size: 25px;
     text-transform: capitalize;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     &:hover {
-        transform: perspective(200px) translate3d(0, 30%, 60px) rotate(-3deg);
+        transform: perspective(200px) translate3d(0, 30%, 30px) rotate(-2deg);
+        box-shadow: 7px 7px 10px rgba(58, 42, 42, 0.3);
         transform-origin: center;
         @media (max-width: 650px) {
-            transform: perspective(200px) translate3d(0, 30%, 50px) rotate(-3deg);
+            transform: perspective(200px) translate3d(0, 30%, 20px) rotate(-2deg);
         }
         @media (max-width: 450px) {
-            transform: perspective(200px) translate3d(0, 20%, 30px) rotate(-3deg);
+            transform: perspective(200px) translate3d(0, 20%, 10px) rotate(-1deg);
         }
     }
     &--loading {

@@ -31,6 +31,9 @@ export default {
     data() {
         return {
             options: {
+                angleLines:{
+                    display: false,
+                },
                 scales: {
                     yAxes: [
                         {
@@ -46,7 +49,8 @@ export default {
                     xAxes: [
                         {
                             ticks: {
-                                display: false
+                                // display: false
+                                suggestedMax: 10,
                             },
                             gridLines: {
                                 display: false,

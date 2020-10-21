@@ -16,11 +16,19 @@
                 <div class="average__circle average__circle--red" :class="kw1AvgAnim">
                     <div class="average__value average__value--red">
                         <ICountUp :delay="delay" :endVal="averages.kw1" :options="options" @ready="onReadyRed" />
+
+                        <transition name="fade-score">
+                            <div class="score score--red" v-if="kw1AvgAnim === 'winner--red'">{{ '+' + score.red }}</div>
+                        </transition>
                     </div>
                 </div>
                 <div class="average__circle average__circle--blue" :class="kw2AvgAnim">
                     <div class="average__value average__value--blue">
                         <ICountUp :delay="delay" :endVal="averages.kw2" :options="options" @ready="onReadyBlue" />
+
+                        <transition name="fade-score">
+                            <div class="score score--blue" v-if="kw2AvgAnim === 'winner--blue'">{{ '+' + score.blue }}</div>
+                        </transition>
                     </div>
                 </div>
             </div>
@@ -46,7 +54,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(['chart', 'error', 'keyword1', 'keyword2', 'score', 'averages', 'winner']),
+        ...mapState(['chart', 'error', 'keyword1', 'keyword2', 'score', 'averages', 'winner', 'score']),
         kw1AvgAnim() {
             let anim = 'none';
             if (this.winner === 'red') {
@@ -63,7 +71,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions(['setScore', 'setWinner']),
+        ...mapActions(['setScore', 'setWinner', 'addToScore']),
         onReadyRed(instance) {
             instance.start(this.addScore);
         },
@@ -73,15 +81,20 @@ export default {
         addScore() {
             // Red team wins
             if (this.averages.kw1 > this.averages.kw2) {
-                console.log(`Red Team wins ${this.averages.kw1 - this.averages.kw2} points`);
                 this.setWinner('red');
+                let pointsToAdd = this.averages.kw1 - this.averages.kw2;
+                let teamWins = { team: 'red', score: pointsToAdd };
+                this.addToScore(teamWins);
                 // Blue team wins
             } else if (this.averages.kw1 < this.averages.kw2) {
-                console.log(`Blue Team wins ${this.averages.kw2 - this.averages.kw1} points`);
                 this.setWinner('blue');
+                let pointsToAdd = this.averages.kw2 - this.averages.kw1;
+                let teamWins = { team: 'blue', score: pointsToAdd };
+                this.addToScore(teamWins);
                 // Draw
             } else if (this.averages.kw1 == this.averages.kw2) {
-                console.log('Egalité parfaite !');
+                this.addToScore({ team: 'red', score: 0 });
+                this.addToScore({ team: 'blue', score: 0 });
             }
         },
     },
@@ -138,7 +151,20 @@ $blueTeam: #2196f3;
 
 .chart {
     &__container {
-        margin-top: 50px;
+        margin: 70px auto 0;
+        width: 1190px;
+        @media (max-width: 1200px) {
+            width: 800px;
+        }
+        @media (max-width: 900px) {
+            width: 600px;
+        }
+        @media (max-width: 650px) {
+            width: 420px;
+        }
+        @media (max-width: 450px) {
+            width: 300px;
+        }
     }
 }
 
@@ -186,5 +212,24 @@ $blueTeam: #2196f3;
     to {
         box-shadow: 0 0 0 8px rgba(33, 150, 243, 0.01);
     }
+}
+
+.score {
+    position: absolute;
+    color: green;
+    top: -30px;
+    left: 60px;
+    font-size: 26px;
+    opacity: 0;
+}
+
+.fade-score-enter-active {
+  transition: all ease-out 4s;
+  opacity: 0;
+}
+
+.fade-score-enter {
+  opacity: 1;
+  transform: translateY(50px);
 }
 </style>

@@ -63,6 +63,16 @@ export default new Vuex.Store({
         SET_WINNER(state, pString) {
             state.winner = pString;
         },
+        RESET_SCORE(state) {
+            state.score.blue = 0;
+            state.score.red = 0;
+        },
+        ADD_SCORE_RED(state, score) {
+            state.score.red += score;
+        },
+        ADD_SCORE_BLUE(state, score) {
+            state.score.blue += score;
+        },
     },
     actions: {
         setKeyword1(context, kw) {
@@ -97,6 +107,12 @@ export default new Vuex.Store({
         },
         setWinner(context, pWinner) {
             context.commit('SET_WINNER', pWinner);
+        },
+        resetScore(context) {
+            context.commit('RESET_SCORE');
+        },
+        addToScore(context, pScore) {
+            pScore.team === 'red' ? context.commit('ADD_SCORE_RED', pScore.score) : context.commit('ADD_SCORE_BLUE', pScore.score);
         },
     },
     modules: {},
