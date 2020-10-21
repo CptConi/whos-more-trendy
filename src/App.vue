@@ -21,7 +21,6 @@ html {
 body{
     background-color: #EEE;
       overflow-x: hidden; 
-    overflow-y: hidden; 
 }
 
 #app {

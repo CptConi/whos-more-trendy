@@ -3,10 +3,6 @@
         <div class="container">
             <h1 class="main-title">Who's More Trendy ?</h1>
             <FormTrends></FormTrends>
-
-            <!-- <h1 class="title" v-if="chart.loaded">
-                <span class="kw1">{{ keyword1 }}</span> VS <span class="kw2">{{ keyword2 }}</span>
-            </h1> -->
             <div class="chart__container" v-if="chart.loaded">
                 <div class="chart__content">
                     <line-chart v-if="chart.loaded" :chart-data="chart.trendsData" :chart-labels="chart.dates" :height="320"></line-chart>
@@ -16,34 +12,38 @@
                 <div class="average__circle average__circle--red" :class="kw1AvgAnim">
                     <div class="average__value average__value--red">
                         <ICountUp :delay="delay" :endVal="averages.kw1" :options="options" @ready="onReadyRed" />
-
                         <transition name="fade-score">
-                            <div class="score score--red" v-if="kw1AvgAnim === 'winner--red'">{{ '+' + score.red }}</div>
+                            <div class="score score--red" v-if="kw1AvgAnim === 'winner--red'">
+                                {{ '+' + (averages.kw1 - averages.kw2) }}
+                            </div>
                         </transition>
                     </div>
                 </div>
                 <div class="average__circle average__circle--blue" :class="kw2AvgAnim">
                     <div class="average__value average__value--blue">
                         <ICountUp :delay="delay" :endVal="averages.kw2" :options="options" @ready="onReadyBlue" />
-
                         <transition name="fade-score">
-                            <div class="score score--blue" v-if="kw2AvgAnim === 'winner--blue'">{{ '+' + score.blue }}</div>
+                            <div class="score score--blue" v-if="kw2AvgAnim === 'winner--blue'">
+                                {{ '+' + (averages.kw2 - averages.kw1) }}
+                            </div>
                         </transition>
                     </div>
                 </div>
             </div>
         </div>
+        <score></score>
     </div>
 </template>
 
 <script>
 import lineChart from '../components/lineChart';
 import FormTrends from '../components/formTrends';
+import Score from '../components/score';
 import ICountUp from 'vue-countup-v2';
 import { mapState, mapActions } from 'vuex';
 export default {
     name: 'Home',
-    components: { lineChart, FormTrends, ICountUp },
+    components: { lineChart, FormTrends, ICountUp, Score },
     data() {
         return {
             delay: 1000,
@@ -190,10 +190,25 @@ $blueTeam: #2196f3;
             background-color: $blueTeam;
             box-shadow: 0 0 0 1px $blueTeam;
         }
+        @media(max-width: 900px){
+            width: 65px;
+            height: 65px;
+        }
+        @media (max-width: 750px) {
+            width: 50px;
+            height: 50px;
+        }
     }
     &__value {
         font-size: 40px;
         transform: translateY(-7%);
+        @media(max-width: 900px){
+            font-size: 32px;
+        }
+        @media (max-width: 750px) {
+            font-size: 28px;
+        }
+
     }
 }
 .winner--red {
@@ -218,18 +233,29 @@ $blueTeam: #2196f3;
     position: absolute;
     color: green;
     top: -30px;
-    left: 60px;
     font-size: 26px;
     opacity: 0;
+    &--red {
+        left: 70px;
+        @media(max-width: 900px){
+        left: 60px;
+        }
+    }
+    &--blue {
+        right: 70px;
+        @media(max-width: 900px){
+        right: 60px;
+        }
+    }
 }
 
 .fade-score-enter-active {
-  transition: all ease-out 4s;
-  opacity: 0;
+    transition: all ease-out 4s;
+    opacity: 0;
 }
 
 .fade-score-enter {
-  opacity: 1;
-  transform: translateY(50px);
+    opacity: 1;
+    transform: translateY(50px);
 }
 </style>
