@@ -21,6 +21,7 @@ export default new Vuex.Store({
         score: {
             red: 0,
             blue: 0,
+            visible: false,
         },
         averages: {
             kw1: '',
@@ -73,6 +74,9 @@ export default new Vuex.Store({
         ADD_SCORE_BLUE(state, score) {
             state.score.blue += score;
         },
+        SET_SCORE_VISIBILITY(state, isVisible) {
+            state.score.visible = isVisible;
+        },
     },
     actions: {
         setKeyword1(context, kw) {
@@ -113,6 +117,9 @@ export default new Vuex.Store({
         },
         addToScore(context, pScore) {
             pScore.team === 'red' ? context.commit('ADD_SCORE_RED', pScore.score) : context.commit('ADD_SCORE_BLUE', pScore.score);
+        },
+        SetScoreVisibility(context, isVisible) {
+            context.commit('SET_SCORE_VISIBILITY', isVisible);
         },
     },
     modules: {},

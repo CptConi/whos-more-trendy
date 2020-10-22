@@ -68,19 +68,22 @@ $blueTeam: #2196f3;
         align-items: center;
     }
     & .score__panel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100px;
         height: 50px;
         &--red {
             border-radius: 12px;
-            background:linear-gradient(to right, $redTeam, transparent 75%); 
-            @media(max-width: 900px) {
+            background: linear-gradient(to right, $redTeam, transparent 75%);
+            @media (max-width: 900px) {
                 height: 45px;
             }
         }
         &--blue {
             border-radius: 12px;
-            background:linear-gradient(to left, $blueTeam, transparent 75%); 
-            @media(max-width: 900px) {
+            background: linear-gradient(to left, $blueTeam, transparent 75%);
+            @media (max-width: 900px) {
                 height: 45px;
             }
         }

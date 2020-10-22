@@ -27,19 +27,17 @@ export default {
                 return kw.charAt(0).toUpperCase() + kw.slice(1);
             },
         },
+
     },
     data() {
         return {
             options: {
-                angleLines:{
-                    display: false,
-                },
                 scales: {
                     yAxes: [
                         {
                             ticks: {
                                 beginAtZero: true,
-                                display: false
+                                display: false,
                             },
                             gridLines: {
                                 display: true,
@@ -49,8 +47,9 @@ export default {
                     xAxes: [
                         {
                             ticks: {
-                                // display: false
-                                suggestedMax: 10,
+                                autoSkip: true,
+                                maxRotation: 0,
+                                minRotation: 0,
                             },
                             gridLines: {
                                 display: false,
@@ -88,15 +87,6 @@ export default {
                         backgroundColor: 'rgba(33, 150, 243, 0.5)',
                         data: this.chartData[1],
                     },
-                    // {
-                    // 	label: "Both Keywords",
-                    // 	borderColor: "#9E9E9E",
-                    // 	pointBackgroundColor: "white",
-                    // 	borderWidth: 2,
-                    // 	pointBorderColor: "#9E9E9E",
-                    // 	backgroundColor: "transparent",
-                    // 	data: this.chartData[2],
-                    // },
                 ],
             },
             this.options

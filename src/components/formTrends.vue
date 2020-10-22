@@ -138,15 +138,18 @@ export default {
             'setAverages',
             'setLoading',
             'setWinner',
+            'SetScoreVisibility',
         ]),
 
         compareTerms() {
             if (this.keyword1 && this.keyword2) {
+                // Set / Reset loading layout
                 this.setLoading(true);
                 this.setLoaded(false);
                 this.setShowErrorMessage(false);
                 this.resetAnimations();
                 googleTrends.compare(this);
+                this.SetScoreVisibility(true);
             } else {
                 this.setErrorMessage('Veuillez rentrer deux termes clés valides');
                 this.setShowErrorMessage(true);
