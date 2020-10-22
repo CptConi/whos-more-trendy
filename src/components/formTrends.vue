@@ -1,40 +1,49 @@
 <template>
-    <form>
-        <div class="input-container">
-            <input
-                class="search__input"
-                @keyup.enter="compareTerms"
-                placeholder="Premier terme"
-                onfocus="this.placeholder = ''"
-                onblur="this.placeholder = 'Premier terme'"
-                type="search"
-                v-model="keyword1"
-            />
-            <input
-                class="search__input"
-                @keyup.enter="compareTerms"
-                placeholder="Second terme"
-                onfocus="this.placeholder = ''"
-                onblur="this.placeholder = 'Second terme'"
-                type="search"
-                v-model="keyword2"
-            />
-        </div>
-        <div class="range__container">
-            <label for="datepicker" class="range__title">Période de recherche:</label>
-            <div class="range__periode">{{ datepickerText }}</div>
-            <input class="range__datepicker" type="range" min="1" max="7" step="1" id="datepicker" value="1" v-model="datepickerValue" />
-        </div>
-        <div class="error-message" v-if="error.showError">
-            {{ error.errorMessage }}
-        </div>
-        <transition name="load">
-            <button class="search__button" @click.prevent="compareTerms" v-if="!chart.loading">Who's more Trendy ?</button>
-            <button class="search__button--loading" v-else>
-                <i class="fa fa-circle-o-notch fa-spin"></i>
-            </button>
-        </transition>
-    </form>
+        <form>
+            <div class="input-container">
+                <input
+                    class="search__input"
+                    @keyup.enter="compareTerms"
+                    placeholder="Premier terme"
+                    onfocus="this.placeholder = ''"
+                    onblur="this.placeholder = 'Premier terme'"
+                    type="search"
+                    v-model="keyword1"
+                />
+                <input
+                    class="search__input"
+                    @keyup.enter="compareTerms"
+                    placeholder="Second terme"
+                    onfocus="this.placeholder = ''"
+                    onblur="this.placeholder = 'Second terme'"
+                    type="search"
+                    v-model="keyword2"
+                />
+            </div>
+            <div class="range__container">
+                <label for="datepicker" class="range__title">Période de recherche:</label>
+                <div class="range__periode">{{ datepickerText }}</div>
+                <input
+                    class="range__datepicker"
+                    type="range"
+                    min="1"
+                    max="7"
+                    step="1"
+                    id="datepicker"
+                    value="1"
+                    v-model="datepickerValue"
+                />
+            </div>
+            <div class="error-message" v-if="error.showError">
+                {{ error.errorMessage }}
+            </div>
+            <transition name="load">
+                <button class="search__button" @click.prevent="compareTerms" v-if="!chart.loading">Who's more Trendy ?</button>
+                <button class="search__button--loading" v-else>
+                    <i class="fa fa-circle-o-notch fa-spin"></i>
+                </button>
+            </transition>
+        </form>
 </template>
 
 <script>

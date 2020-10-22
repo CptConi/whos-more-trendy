@@ -20,7 +20,6 @@ html {
 
 body{
     background-color: #EEE;
-      overflow-x: hidden; 
 }
 
 #app {
