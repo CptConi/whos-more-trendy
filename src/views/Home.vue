@@ -2,6 +2,7 @@
     <div class="content">
         <div class="container">
             <h1 class="main-title">Who's More Trendy ?</h1>
+            <Help></Help>
             <FormTrends></FormTrends>
             <transition name="fade-short">
                 <div class="chart__container" v-if="chart.loaded">
@@ -23,10 +24,11 @@ import lineChart from '../components/lineChart';
 import FormTrends from '../components/formTrends';
 import Score from '../components/score';
 import Averages from '../components/averages';
+import Help from '../components/help'
 import { mapState } from 'vuex';
 export default {
     name: 'Home',
-    components: { lineChart, FormTrends, Score, Averages },
+    components: { lineChart, FormTrends, Score, Averages, Help },
     data() {
         return {
             

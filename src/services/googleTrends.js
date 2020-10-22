@@ -1,11 +1,11 @@
-// const googleTrends = new URL('https://whosmoretrendy.herokuapp.com/');
-const localTest = new URL('http://localhost:3001/');
+const googleTrends = new URL('https://whosmoretrendy.herokuapp.com/');
+// const localTest = new URL('http://localhost:3001/');
 
 export default {
     async compare(Vue) {
         try {
             Vue.setLoading(true);
-            let result = await Vue.$http.get(localTest + `${Vue.keyword1}/${Vue.keyword2}/${Vue.period}`);
+            let result = await Vue.$http.get(googleTrends + `${Vue.keyword1}/${Vue.keyword2}/${Vue.period}`);
             let dates = result.data.data.map((data) => data.date);
             let trendsData = [
                 result.data.data.map((data) => data.keyword1),
