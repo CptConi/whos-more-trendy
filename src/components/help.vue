@@ -1,7 +1,7 @@
 <template>
     <div>
         <div @click.prevent="showHelpPanel" id="help-btn">
-            <p>Comment jouer <span>?</span></p>
+            <p>Comment jouer ?</p>
         </div>
         <transition name="help-transition">
             <div v-if="isVisible" class="help__container">
@@ -12,10 +12,10 @@
                 </p>
                 <br />
                 <p>
-                    La partie se déroule en plusieurs round. A chacun de ses rounds, les deux équipes choisissent un mot-clé.
+                    La partie se déroule en plusieurs round. À chaque round, les deux équipes choisissent un mot-clé.
                     <br />
                     <strong>Le but est très simple:</strong>
-                    Le mot clé le plus recherché sur la plate-forme Google l'emporte !
+                    Le terme le plus recherché sur la plate-forme Google l'emporte !
                 </p>
                 <div id="close-btn" @click.prevent="showHelpPanel">&times;</div>
             </div>
