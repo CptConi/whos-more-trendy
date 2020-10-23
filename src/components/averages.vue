@@ -120,6 +120,10 @@ $blueTeam: #2196f3;
         @media (max-width: 750px) {
             width: 50px;
             height: 50px;
+            margin: 15px auto 60px;
+        }
+        @media (max-width: 450px) {
+            margin: 15px auto 60px;
         }
     }
     &__value {

@@ -5,10 +5,10 @@
         </div>
         <transition name="help-transition">
             <div v-if="isVisible" class="help__container">
-                <h2>Comment jouer ?</h2>
+                <h2>COMMENT JOUER ?</h2>
                 <p>
-                    Who's More Trendy est un jeu basé sur l'algorithme de recherche Google. Le jeu peut se jouer en 1 contre 1, ou en
-                    équipe: L'équipe 🟥Rouge face à l'équipe 🟦Bleue.
+                    Who's More Trendy est un jeu basé sur l'algorithme de recherche Google. <br />
+                    Le jeu peut se jouer en 1 contre 1, ou en équipe: L'équipe 🟥Rouge face à l'équipe 🟦Bleue.
                 </p>
                 <br />
                 <p>
@@ -59,7 +59,7 @@ export default {
 }
 
 .help__container {
-    border: 1px solid black;
+    border: 1px solid #AAA;
     margin: auto;
     min-width: 90vw;
     max-width: 90vw;
@@ -74,6 +74,15 @@ export default {
     top: 50%;
     left: 50%;
     overflow-y: auto;
+    & h2 {
+        font-size: 26px;
+        font-weight: 600;
+        margin: 10px auto 30px;
+    }
+    & p {
+        font-size: 20px;
+        padding-bottom: 14px;
+    }
 }
 
 #close-btn {
@@ -82,7 +91,7 @@ export default {
     text-align: center;
     top: 10px;
     right: 10px;
-    padding: 2px 10px 4px;
+    padding: 2px 10px 5px;
     border-radius: 50px;
     background-color: red;
     color: white;
@@ -99,16 +108,10 @@ export default {
 }
 
 .help-transition-leave-active {
-    transition: all 0.5s ease-in;
-    white-space: pre;
-    overflow-x: hidden;
-    width: 0;
-    min-width: 0;
+    transition: all 0.3s ease-out;
     opacity: 0;
 }
 .help-transition-leave {
-    width: 0;
-    min-width: 0;
-    opacity: 0;
+    opacity: 1;
 }
 </style>

@@ -221,6 +221,7 @@ form {
         text-transform: capitalize;
         font-size: 22px;
         color: #f5f5f5;
+        transform: all 0.2s ease;
         &::-webkit-search-cancel-button {
             position: relative;
             right: 20px;
@@ -235,6 +236,9 @@ form {
             }
             &:focus {
                 box-shadow: 0 0 20px #f44336;
+            }
+            &:hover{
+                transform: scale(1.02);
             }
             @media (max-width: 650px) {
                 margin: auto;
@@ -254,6 +258,9 @@ form {
             }
             &:focus {
                 box-shadow: 0 0 20px #2196f3;
+            }
+            &:hover{
+                transform: scale(1.02);
             }
             @media (max-width: 650px) {
                 margin: auto;

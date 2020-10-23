@@ -1,21 +1,21 @@
 <template>
     <div class="content">
-        <div class="container">
-            <h1 class="main-title">Who's More Trendy ?</h1>
-            
-            <FormTrends></FormTrends>
-            <Help></Help>
-            <transition name="fade-short">
-                <div class="chart__container" v-if="chart.loaded">
-                    <div class="chart__content">
-                        <line-chart v-if="chart.loaded" :chart-data="chart.trendsData" :chart-labels="chart.dates" :height="320"></line-chart>
-                    </div>
-                </div>
-            </transition>
-            <transition name="fade-long">
-                <Averages></Averages>
-            </transition>
-        </div>
+        <h1 class="main-title">Who's More Trendy ?</h1>
+        <FormTrends></FormTrends>
+        <Help></Help>
+        <transition name="fade-short">
+            <div class="chart__container" v-if="chart.loaded">
+                <line-chart
+                    v-if="chart.loaded"
+                    :chart-data="chart.trendsData"
+                    :chart-labels="chart.dates"
+                    :height="chartHeight"
+                ></line-chart>
+            </div>
+        </transition>
+        <transition name="fade-long">
+            <Averages></Averages>
+        </transition>
         <transition name="fade-short"><Score v-if="score.visible"></Score></transition>
     </div>
 </template>
@@ -31,15 +31,25 @@ export default {
     name: 'Home',
     components: { lineChart, FormTrends, Score, Averages, Help },
     data() {
-        return {
-            
-        };
+        return {};
     },
     computed: {
         ...mapState(['chart', 'error', 'keyword1', 'keyword2', 'score']),
-        
+        chartHeight() {
+            if (document.body.clientWidth > 1200) {
+                return 300;
+            } else if (document.body.clientWidth < 1200 && document.body.clientWidth > 900) {
+                return 260;
+            } else if (document.body.clientWidth < 900 && document.body.clientWidth > 650) {
+                return 220;
+            } else if (document.body.clientWidth < 650 && document.body.clientWidth > 450) {
+                return 190;
+            } else if (document.body.clientWidth < 450) {
+                return 150;
+            }
+            return 300;
+        },
     },
-    
 };
 </script>
 
@@ -91,7 +101,7 @@ $blueTeam: #2196f3;
 
 .chart {
     &__container {
-        margin: 70px auto 0;
+        margin: 20px auto 0;
         width: 1190px;
         @media (max-width: 1200px) {
             width: 800px;
@@ -107,12 +117,6 @@ $blueTeam: #2196f3;
         }
     }
 }
-
-
-
-
-
-
 
 .fade-long-enter-active {
     transition: all ease 3s;

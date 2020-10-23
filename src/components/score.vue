@@ -42,7 +42,7 @@ $blueTeam: #2196f3;
     }
 
     position: fixed;
-    bottom: 3.5%;
+    bottom: 1.5%;
     left: calc(50% - 150px);
     width: 300px;
     height: 50px;
@@ -57,10 +57,9 @@ $blueTeam: #2196f3;
         height: 45px;
     }
     @media (max-width: 750px) {
-        position: relative;
         width: 220px;
         left: calc(50% - 110px);
-        margin: 20px 0;
+        margin: 10px 0;
     }
     & .score__box {
         display: flex;
