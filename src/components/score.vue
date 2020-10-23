@@ -48,7 +48,7 @@ $blueTeam: #2196f3;
     height: 50px;
     background-color: #546e7a;
     border-radius: 12px;
-    box-shadow: 0 8px 10px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
     @media (max-width: 1250px) {
         width: 220px;
         left: calc(50% - 110px);

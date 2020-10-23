@@ -94,6 +94,7 @@ $blueTeam: #2196f3;
     &__container {
         display: flex;
         justify-content: space-around;
+        margin-bottom: 50px;
     }
     &__circle {
         width: 80px;

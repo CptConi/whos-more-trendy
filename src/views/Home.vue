@@ -16,7 +16,7 @@
                 <Averages></Averages>
             </transition>
         </div>
-        <Score v-if="score.visible"></Score>
+        <transition name="fade-short"><Score v-if="score.visible"></Score></transition>
     </div>
 </template>
 
