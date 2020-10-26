@@ -8,13 +8,16 @@
                 <h2>COMMENT JOUER ?</h2>
                 <p>
                     Who's More Trendy est un jeu basé sur l'algorithme de recherche Google. <br />
-                    Le jeu peut se jouer en 1 contre 1, ou en équipe: L'équipe 🟥Rouge face à l'équipe 🟦Bleue.
+                    Le jeu peut se jouer en 1 contre 1, ou en équipe.
                 </p>
                 <br />
                 <p>
-                    La partie se déroule en plusieurs round. À chaque round, les deux équipes choisissent un mot-clé.
+                    La partie se déroule en plusieurs round. À chaque round, les deux équipes choisissent un mot-clé, et lancent le match en
+                    appuyant sur le bouton 'Who's More Trendy ?'
+                    <br />
                     <br />
                     <strong>Le but est très simple:</strong>
+                    <br />
                     Le terme le plus recherché sur la plate-forme Google l'emporte !
                 </p>
                 <div id="close-btn" @click.prevent="showHelpPanel">&times;</div>
@@ -59,7 +62,7 @@ export default {
 }
 
 .help__container {
-    border: 1px solid #AAA;
+    border: 1px solid #aaa;
     margin: auto;
     min-width: 90vw;
     max-width: 90vw;

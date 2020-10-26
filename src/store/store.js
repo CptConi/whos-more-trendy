@@ -28,6 +28,11 @@ export default new Vuex.Store({
             kw2: '',
         },
         winner: '',
+        theme: {
+            team1: '#f44336',
+            team2: '#2196f3',
+            darkMode: false,
+        },
     },
     mutations: {
         SET_KEYWORD1(state, kw) {
@@ -77,6 +82,15 @@ export default new Vuex.Store({
         SET_SCORE_VISIBILITY(state, isVisible) {
             state.score.visible = isVisible;
         },
+        SET_THEME_TEAM_1(state, pColor) {
+            state.theme.team1 = pColor;
+        },
+        SET_THEME_TEAM_2(state, pColor) {
+            state.theme.team2 = pColor;
+        },
+        SET_THEME_APP(state, pTheme) {
+            state.theme.darkMode = pTheme;
+        },
     },
     actions: {
         setKeyword1(context, kw) {
@@ -121,6 +135,15 @@ export default new Vuex.Store({
         SetScoreVisibility(context, isVisible) {
             context.commit('SET_SCORE_VISIBILITY', isVisible);
         },
+        setTheme(context, pTeam, pTheme) {
+            if (pTeam === '1') {
+                context.commit('SET_THEME_TEAM_1', pTheme)
+            } else if (pTeam === '2') {
+                context.commit('SET_THEME_TEAM_2', pTheme)
+            } else if (pTeam === 'darkMode') {
+                context.commit('SET_THEME_APP', pTheme)
+            }
+        }
     },
     modules: {},
 });

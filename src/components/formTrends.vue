@@ -1,4 +1,5 @@
 <template>
+    <div>
         <form>
             <div class="input-container">
                 <input
@@ -23,20 +24,12 @@
             <div class="range__container">
                 <label for="datepicker" class="range__title">Période de recherche:</label>
                 <div class="range__periode">{{ datepickerText }}</div>
-                <input
-                    class="range__datepicker"
-                    type="range"
-                    min="1"
-                    max="7"
-                    step="1"
-                    id="datepicker"
-                    value="1"
-                    v-model="datepickerValue"
-                />
+                <input class="range__datepicker" type="range" min="1" max="7" step="1" id="datepicker" value="1" v-model="datepickerValue" />
             </div>
             <div class="error-message" v-if="error.showError">
                 {{ error.errorMessage }}
             </div>
+            <Settings></Settings>
             <transition name="load">
                 <button class="search__button" @click.prevent="compareTerms" v-if="!chart.loading">Who's more Trendy ?</button>
                 <button class="search__button--loading" v-else>
@@ -44,18 +37,22 @@
                 </button>
             </transition>
         </form>
+    </div>
 </template>
 
 <script>
 import googleTrends from '../services/googleTrends';
 import Utils from '../services/utils';
+import Settings from '../components/settings'
 import { mapActions } from 'vuex';
 export default {
     name: 'formTrends',
+    components:{Settings},
     data() {
         return {
             datepickerValue: '1',
             datepickerText: '1 Semaine',
+            colorPicker: '',
         };
     },
     computed: {
@@ -97,6 +94,11 @@ export default {
             get() {
                 return this.$store.state.winner;
             },
+        },
+        theme: {
+            get(){
+                return this.$store.theme;
+            }
         },
     },
     watch: {
@@ -237,7 +239,7 @@ form {
             &:focus {
                 box-shadow: 0 0 20px #f44336;
             }
-            &:hover{
+            &:hover {
                 transform: scale(1.02);
             }
             @media (max-width: 650px) {
@@ -259,7 +261,7 @@ form {
             &:focus {
                 box-shadow: 0 0 20px #2196f3;
             }
-            &:hover{
+            &:hover {
                 transform: scale(1.02);
             }
             @media (max-width: 650px) {
