@@ -10,14 +10,19 @@
                         :color="{ checked: '#673AB7', unchecked: '#E0E0E0' }"
                         :width="70"
                         :height="30"
+                        :labels="{checked:'Dark', unchecked:'Light'}"
                         v-model="appTheme"
                     ></toggle-button>
                 </div>
-                <div class="settings__panel--teams">
-                    <div class="equipe equipe1">Equipe 1</div>
-                    <VSwatches v-model="team1"></VSwatches>
-                    <div class="equipe equipe2">Equipe 2</div>
-                    <VSwatches v-model="team2"></VSwatches>
+                <div class="settings__panel--colorbox">
+                    <div class="settings__panel--teams">
+                        <div class="equipe equipe1" :style="getAppFontStyle">Equipe 1</div>
+                        <VSwatches v-model="team1"></VSwatches>
+                    </div>
+                    <div class="settings__panel--teams">
+                        <div class="equipe equipe2" :style="getAppFontStyle">Equipe 2</div>
+                        <VSwatches v-model="team2"></VSwatches>
+                    </div>
                 </div>
             </div>
         </transition>
@@ -32,14 +37,6 @@ export default {
     data() {
         return {
             isVisible: true,
-            hue1: '',
-            hue2: '',
-            color: {
-                hue: 50,
-                saturation: 100,
-                luminosity: 50,
-                alpha: 1,
-            },
         };
     },
     computed: {
@@ -67,6 +64,15 @@ export default {
                 this.$store.commit('SET_THEME_TEAM_2', value);
             },
         },
+        getAppFontStyle() {
+            if (!this.appTheme.darkMode) {
+                return `
+                color: black;
+                `;
+            } else {
+                return ``;
+            }
+        },
     },
     methods: {
         showSettingsPanel() {
@@ -87,7 +93,10 @@ export default {
 
 .showSettings--img {
     width: 50px;
-    transform: rotate(-30deg);
+    &:hover {
+        transition: all 10s linear;
+        transform: rotate(360deg);
+    }
 }
 
 .settings__panel {
@@ -97,15 +106,27 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    &--theme{
+    &--colorbox{
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        @media(max-width: 900px){
+            width: 100%;
+            flex-direction: column;
+        }
+    }
+    &--theme {
         margin: 10px auto;
     }
     &--teams {
-        padding: 15px;
+        padding: 0px 15px 5px;
+        margin-bottom: 5px;
         border: 1px solid #aaa;
         border-radius: 10px;
-        display: grid;
-        grid-template: repeat(2, 2);
+        display: flex;
+        flex-direction: column;
     }
 }
 

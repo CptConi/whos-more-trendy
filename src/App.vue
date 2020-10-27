@@ -18,11 +18,9 @@ html {
     scroll-behavior: smooth;
 }
 
-body{
-    background-color: #EEE;
-}
-
 #app {
+    min-height: 100vh;
+    background-color: #e2e2e2;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

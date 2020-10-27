@@ -1,5 +1,5 @@
-<template>
-    <div>
+<template >
+    <div :style="getStyle">
         <form>
             <div class="input-container">
                 <input
@@ -24,7 +24,16 @@
             <div class="range__container">
                 <label for="datepicker" class="range__title">Période de recherche:</label>
                 <div class="range__periode">{{ datepickerText }}</div>
-                <input class="range__datepicker" type="range" min="1" max="7" step="1" id="datepicker" value="1" v-model="datepickerValue" />
+                <input
+                    class="range__datepicker"
+                    type="range"
+                    min="1"
+                    max="7"
+                    step="1"
+                    id="datepicker"
+                    value="1"
+                    v-model="datepickerValue"
+                />
             </div>
             <div class="error-message" v-if="error.showError">
                 {{ error.errorMessage }}
@@ -43,11 +52,12 @@
 <script>
 import googleTrends from '../services/googleTrends';
 import Utils from '../services/utils';
-import Settings from '../components/settings'
+import Settings from '../components/settings';
+import ThemeManager from '../services/theme';
 import { mapActions } from 'vuex';
 export default {
     name: 'formTrends',
-    components:{Settings},
+    components: { Settings },
     data() {
         return {
             datepickerValue: '1',
@@ -96,10 +106,16 @@ export default {
             },
         },
         theme: {
-            get(){
-                return this.$store.theme;
-            }
+            get() {
+                return this.$store.state.theme;
+            },
         },
+        getStyle(){
+            return ThemeManager.getStyle(this);
+        },
+        appTheme(){
+            return ThemeManager.appTheme(this);
+        }
     },
     watch: {
         datepickerValue() {
@@ -190,7 +206,7 @@ form {
     margin: 20px auto;
     border: 1px solid #ccc;
     border-radius: 12px;
-    background-color: #546e7a;
+    background-color: var(--app-primary-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 1100px;
     @media (max-width: 1200px) {
@@ -231,7 +247,7 @@ form {
         }
         &:nth-child(1) {
             margin-right: 2%;
-            background-color: #f44336;
+            background-color: var(--team1-color);
             &::placeholder {
                 color: #ddd;
                 font-size: 22px;
@@ -253,7 +269,7 @@ form {
         }
         &:nth-child(2) {
             margin-left: 2%;
-            background-color: #2196f3;
+            background-color: var(--team2-color);
             &::placeholder {
                 color: #ddd;
                 font-size: 22px;
@@ -287,8 +303,9 @@ form {
         padding: 10px 10px;
         margin: 30px 110px 10px;
         border-radius: 12px;
-        background: linear-gradient(145deg, #4c636e, #5a7683);
-        box-shadow: 10px 10px 30px #475e68, -10px -10px 30px #617f8c;
+        color: var(--app-font-color);
+        background: linear-gradient(145deg, var(--app-primary-color), var(--app-secondary-color));
+        box-shadow: -10px -10px 10px 1px var(--app-secondary-color);
         @media (max-width: 650px) {
             margin: 30px 40px 10px;
         }
@@ -299,7 +316,6 @@ form {
     &__title {
         margin: 10px 0 5px;
         font-size: 18px;
-        color: #f1f1f1;
     }
     &__datepicker {
         width: 75%;
@@ -309,7 +325,6 @@ form {
     &__periode {
         font-size: 14px;
         margin-bottom: 15px;
-        color: #ccc;
     }
 }
 

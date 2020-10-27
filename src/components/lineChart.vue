@@ -1,5 +1,6 @@
 <script>
 import { Bar } from 'vue-chartjs';
+import Utils from '../services/utils';
 export default {
     extends: Bar,
     props: {
@@ -27,7 +28,11 @@ export default {
                 return kw.charAt(0).toUpperCase() + kw.slice(1);
             },
         },
-
+        theme: {
+            get() {
+                return this.$store.state.theme;
+            },
+        },
     },
     data() {
         return {
@@ -73,18 +78,22 @@ export default {
                 datasets: [
                     {
                         label: this.keyword1,
-                        borderColor: '#f44336',
+                        borderColor: `${this.theme.team1}`,
                         borderWidth: 3,
-                        pointBorderColor: '#f44336',
-                        backgroundColor: 'rgba(244, 67, 54, 0.5)',
+                        pointBorderColor: `${this.theme.team1}`,
+                        backgroundColor: `rgba(${Utils.hexToRgb(this.theme.team1).r}, ${Utils.hexToRgb(this.theme.team1).g}, ${
+                            Utils.hexToRgb(this.theme.team1).b
+                        }, 0.5)`,
                         data: this.chartData[0],
                     },
                     {
                         label: this.keyword2,
-                        borderColor: '#2196F3',
+                        borderColor: `${this.theme.team2}`,
                         borderWidth: 3,
-                        pointBorderColor: '#2196F3',
-                        backgroundColor: 'rgba(33, 150, 243, 0.5)',
+                        pointBorderColor: `${this.theme.team2}`,
+                        backgroundColor: `rgba(${Utils.hexToRgb(this.theme.team2).r}, ${Utils.hexToRgb(this.theme.team2).g}, ${
+                            Utils.hexToRgb(this.theme.team2).b
+                        }, 0.5)`,
                         data: this.chartData[1],
                     },
                 ],

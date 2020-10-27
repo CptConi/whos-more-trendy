@@ -1,23 +1,31 @@
 <template>
-    <div class="average__container" v-if="chart.loaded">
-        <div class="average__circle average__circle--red" :class="kw1AvgAnim">
-            <div class="average__value average__value--red">
-                <ICountUp :delay="delay" :endVal="averages.kw1" :options="options" @ready="onReadyRed" />
-                <transition name="fade-score">
-                    <div class="score score--red" v-if="kw1AvgAnim === 'winner--red'">
-                        {{ '+' + (averages.kw1 - averages.kw2) }}
-                    </div>
-                </transition>
+    <div>
+        <style>
+            :root{
+                --team1-color :{{theme.team1}};
+                --team2-color :{{theme.team2}};
+            }
+        </style>
+        <div class="average__container" v-if="chart.loaded">
+            <div class="average__circle average__circle--red" :class="kw1AvgAnim">
+                <div class="average__value average__value--red">
+                    <ICountUp :delay="delay" :endVal="averages.kw1" :options="options" @ready="onReadyRed" />
+                    <transition name="fade-score">
+                        <div class="score score--red" v-if="kw1AvgAnim === 'winner--red'">
+                            {{ '+' + (averages.kw1 - averages.kw2) }}
+                        </div>
+                    </transition>
+                </div>
             </div>
-        </div>
-        <div class="average__circle average__circle--blue" :class="kw2AvgAnim">
-            <div class="average__value average__value--blue">
-                <ICountUp :delay="delay" :endVal="averages.kw2" :options="options" @ready="onReadyBlue" />
-                <transition name="fade-score">
-                    <div class="score score--blue" v-if="kw2AvgAnim === 'winner--blue'">
-                        {{ '+' + (averages.kw2 - averages.kw1) }}
-                    </div>
-                </transition>
+            <div class="average__circle average__circle--blue" :class="kw2AvgAnim">
+                <div class="average__value average__value--blue">
+                    <ICountUp :delay="delay" :endVal="averages.kw2" :options="options" @ready="onReadyBlue" />
+                    <transition name="fade-score">
+                        <div class="score score--blue" v-if="kw2AvgAnim === 'winner--blue'">
+                            {{ '+' + (averages.kw2 - averages.kw1) }}
+                        </div>
+                    </transition>
+                </div>
             </div>
         </div>
     </div>
@@ -39,7 +47,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(['chart', 'averages', 'winner']),
+        ...mapState(['chart', 'averages', 'winner', 'theme']),
         kw1AvgAnim() {
             let anim = 'none';
             if (this.winner === 'red') {
@@ -88,8 +96,6 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-$redTeam: #f44336;
-$blueTeam: #2196f3;
 .average {
     &__container {
         display: flex;
@@ -104,15 +110,15 @@ $blueTeam: #2196f3;
         align-items: center;
         border-radius: 50px;
         color: #f1f1f1;
-        font-family: 'Pacifico', sans-serif;
         &--red {
-            background-color: $redTeam;
-            box-shadow: 0 0 0 1px $redTeam;
+            background-color: var(--team1-color);
+            box-shadow: 0 0 0 1px var(--team1-color);
         }
         &--blue {
-            background-color: $blueTeam;
-            box-shadow: 0 0 0 1px $blueTeam;
+            background-color: var(--team2-color);
+            box-shadow: 0 0 0 1px var(--team2-color);
         }
+        font-family: 'Pacifico', sans-serif;
         @media (max-width: 900px) {
             width: 65px;
             height: 65px;
