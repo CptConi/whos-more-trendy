@@ -4,6 +4,7 @@ import router from './router/router';
 import store from './store/store';
 import axios from 'axios';
 import ToggleButton from 'vue-js-toggle-button';
+import 'vue-swatches/dist/vue-swatches.css'
 
 Vue.use(ToggleButton);
 Vue.config.productionTip = false;

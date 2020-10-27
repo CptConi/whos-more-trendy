@@ -5,7 +5,7 @@
         </button>
         <transition name="settings-transition">
             <div v-if="isVisible" class="settings__panel">
-                <div class="setting__panel--theme">
+                <div class="settings__panel--theme">
                     <toggle-button
                         :color="{ checked: '#673AB7', unchecked: '#E0E0E0' }"
                         :width="70"
@@ -14,8 +14,10 @@
                     ></toggle-button>
                 </div>
                 <div class="settings__panel--teams">
-                    <div class="equipe1">Equipe 1 <input type="color" v-model="team1" /></div>
-                    <div class="equipe2">Equipe 2 <input type="color" v-model="team2" /></div>
+                    <div class="equipe equipe1">Equipe 1</div>
+                    <VSwatches v-model="team1"></VSwatches>
+                    <div class="equipe equipe2">Equipe 2</div>
+                    <VSwatches v-model="team2"></VSwatches>
                 </div>
             </div>
         </transition>
@@ -23,11 +25,21 @@
 </template>
 
 <script>
+import VSwatches from 'vue-swatches';
 export default {
     name: 'Settings',
+    components: { VSwatches },
     data() {
         return {
             isVisible: true,
+            hue1: '',
+            hue2: '',
+            color: {
+                hue: 50,
+                saturation: 100,
+                luminosity: 50,
+                alpha: 1,
+            },
         };
     },
     computed: {
@@ -81,10 +93,24 @@ export default {
 .settings__panel {
     color: white;
     margin: 0 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &--theme{
+        margin: 10px auto;
+    }
     &--teams {
+        padding: 15px;
         border: 1px solid #aaa;
         border-radius: 10px;
+        display: grid;
+        grid-template: repeat(2, 2);
     }
+}
+
+.equipe {
+    margin: 10px auto;
 }
 
 //  Transitions ===============================
