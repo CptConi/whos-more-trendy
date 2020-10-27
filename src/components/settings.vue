@@ -7,20 +7,21 @@
             <div v-if="isVisible" class="settings__panel">
                 <div class="settings__panel--theme">
                     <toggle-button
-                        :color="{ checked: '#673AB7', unchecked: '#E0E0E0' }"
+                        :color="{ checked: '#212b30', unchecked: '#999999' }"
+                        :switch-color="{ checked: '#37474F', unchecked: '#DDE1E3' }"
                         :width="70"
                         :height="30"
                         :labels="{checked:'Dark', unchecked:'Light'}"
-                        v-model="appTheme"
+                        v-model="applicationTheme"
                     ></toggle-button>
                 </div>
                 <div class="settings__panel--colorbox">
                     <div class="settings__panel--teams">
-                        <div class="equipe equipe1" :style="getAppFontStyle">Equipe 1</div>
+                        <div class="equipe equipe1">Equipe 1</div>
                         <VSwatches v-model="team1"></VSwatches>
                     </div>
                     <div class="settings__panel--teams">
-                        <div class="equipe equipe2" :style="getAppFontStyle">Equipe 2</div>
+                        <div class="equipe equipe2">Equipe 2</div>
                         <VSwatches v-model="team2"></VSwatches>
                     </div>
                 </div>
@@ -31,6 +32,7 @@
 
 <script>
 import VSwatches from 'vue-swatches';
+import ThemeManager from '../services/theme';
 export default {
     name: 'Settings',
     components: { VSwatches },
@@ -40,7 +42,7 @@ export default {
         };
     },
     computed: {
-        appTheme: {
+        applicationTheme: {
             get() {
                 return this.$store.state.theme.darkMode;
             },
@@ -64,15 +66,12 @@ export default {
                 this.$store.commit('SET_THEME_TEAM_2', value);
             },
         },
-        getAppFontStyle() {
-            if (!this.appTheme.darkMode) {
-                return `
-                color: black;
-                `;
-            } else {
-                return ``;
-            }
+        getStyle(){
+            return ThemeManager.getStyle(this);
         },
+        appTheme(){
+            return ThemeManager.appTheme(this);
+        }
     },
     methods: {
         showSettingsPanel() {
@@ -100,7 +99,7 @@ export default {
 }
 
 .settings__panel {
-    color: white;
+    color: var(--app-font-color);
     margin: 0 20%;
     display: flex;
     justify-content: center;
@@ -123,7 +122,8 @@ export default {
     &--teams {
         padding: 0px 15px 5px;
         margin-bottom: 5px;
-        border: 1px solid #aaa;
+        border: 1px solid var(--app-secondary-color);
+        box-shadow: 0 0 8px var(--app-shadow-color);
         border-radius: 10px;
         display: flex;
         flex-direction: column;

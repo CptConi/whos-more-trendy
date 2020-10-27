@@ -238,7 +238,6 @@ form {
         text-align: center;
         text-transform: capitalize;
         font-size: 22px;
-        color: #f5f5f5;
         transform: all 0.2s ease;
         &::-webkit-search-cancel-button {
             position: relative;
@@ -248,12 +247,13 @@ form {
         &:nth-child(1) {
             margin-right: 2%;
             background-color: var(--team1-color);
+            color: var(--team1-font);
             &::placeholder {
-                color: #ddd;
+                color: var(--team1-font);
                 font-size: 22px;
             }
             &:focus {
-                box-shadow: 0 0 20px #f44336;
+                box-shadow: 0 0 20px var(--team1-color);
             }
             &:hover {
                 transform: scale(1.02);
@@ -270,12 +270,13 @@ form {
         &:nth-child(2) {
             margin-left: 2%;
             background-color: var(--team2-color);
+            color: var(--team2-font);
             &::placeholder {
-                color: #ddd;
+                color: var(--team2-font);
                 font-size: 22px;
             }
             &:focus {
-                box-shadow: 0 0 20px #2196f3;
+                box-shadow: 0 0 20px var(--team2-color);
             }
             &:hover {
                 transform: scale(1.02);
@@ -300,12 +301,13 @@ form {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 10px 10px;
+        padding: 10px 10px 20px;
         margin: 30px 110px 10px;
         border-radius: 12px;
+        border: 1px solid var(--app-secondary-color);
         color: var(--app-font-color);
         background: linear-gradient(145deg, var(--app-primary-color), var(--app-secondary-color));
-        box-shadow: -10px -10px 10px 1px var(--app-secondary-color);
+        box-shadow: 0 0 40px var(--app-shadow-color);
         @media (max-width: 650px) {
             margin: 30px 40px 10px;
         }
@@ -335,16 +337,16 @@ form {
     cursor: pointer;
     border: none;
     outline: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 10px -3px var(--team1-color), -3px -3px 10px -3px var(--team2-color);
     border-radius: 20px;
-    color: #f1f1f1;
-    background-color: #47498a;
+    color: var(--app-font-color);
+    background: linear-gradient(160deg, var(--team1-color), var(--team2-color));
     font-size: 25px;
     text-transform: capitalize;
     transition: all 0.3s ease;
     &:hover {
         transform: perspective(200px) translate3d(0, 30%, 30px) rotate(-2deg);
-        box-shadow: 7px 7px 10px rgba(58, 42, 42, 0.3);
+        box-shadow: 6px 4px 15px -3px var(--team1-color), 3px -4px 15px -3px var(--team2-color);
         transform-origin: center;
         @media (max-width: 650px) {
             transform: perspective(200px) translate3d(0, 30%, 20px) rotate(-2deg);
@@ -360,10 +362,10 @@ form {
         cursor: pointer;
         border: none;
         outline: none;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 3px 3px 10px -3px var(--team1-color), -3px -3px 10px -3px var(--team2-color);
         border-radius: 20px;
-        color: #f1f1f1;
-        background-color: #47498a;
+        color: var(--app-font-color);
+        background: linear-gradient(160deg, var(--team1-color), var(--team2-color));
         font-size: 25px;
         transition: transform 0.3s ease;
     }

@@ -1,11 +1,5 @@
 <template>
-    <div>
-        <style>
-            :root{
-                --team1-color :{{theme.team1}};
-                --team2-color :{{theme.team2}};
-            }
-        </style>
+    <div :style="getStyle">
         <div class="average__container" v-if="chart.loaded">
             <div class="average__circle average__circle--red" :class="kw1AvgAnim">
                 <div class="average__value average__value--red">
@@ -33,6 +27,7 @@
 
 <script>
 import ICountUp from 'vue-countup-v2';
+import ThemeManager from '../services/theme';
 import { mapState, mapActions } from 'vuex';
 export default {
     name: 'Averages',
@@ -61,6 +56,12 @@ export default {
                 anim = 'winner--blue';
             }
             return anim;
+        },
+        getStyle() {
+            return ThemeManager.getStyle(this);
+        },
+        appTheme() {
+            return ThemeManager.appTheme(this);
         },
     },
     methods: {
@@ -109,7 +110,7 @@ export default {
         justify-content: center;
         align-items: center;
         border-radius: 50px;
-        color: #f1f1f1;
+        color: var(--app-font-color);
         &--red {
             background-color: var(--team1-color);
             box-shadow: 0 0 0 1px var(--team1-color);
@@ -135,6 +136,12 @@ export default {
     &__value {
         font-size: 40px;
         transform: translateY(-7%);
+        &--red {
+            color: var(--team1-font);
+        }
+        &--blue {
+            color: var(--team2-font);
+        }
         @media (max-width: 900px) {
             font-size: 32px;
         }
