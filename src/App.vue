@@ -32,11 +32,9 @@ export default {
 
 html {
     scroll-behavior: smooth;
-}
-
-body{
     background-color: var(--app-secondary-color);
 }
+
 
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -44,7 +42,8 @@ body{
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     background-color: var(--app-secondary-color);
-    min-height: 100vh;
+    min-height: calc(100vh);
+    background-repeat: repeat-y;
 }
 
 </style>

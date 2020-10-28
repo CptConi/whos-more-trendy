@@ -3,6 +3,9 @@
         <h1 class="main-title">Who's More Trendy ?</h1>
         <FormTrends></FormTrends>
         <Help></Help>
+        <transition name="fade-long">
+            <Averages></Averages>
+        </transition>
         <transition name="fade-short">
             <div class="chart__container" v-if="chart.loaded">
                 <line-chart
@@ -12,9 +15,6 @@
                     :height="chartHeight"
                 ></line-chart>
             </div>
-        </transition>
-        <transition name="fade-long">
-            <Averages></Averages>
         </transition>
         <transition name="fade-short"><Score v-if="score.visible"></Score></transition>
     </div>
@@ -85,7 +85,8 @@ export default {
 }
 .chart {
     &__container {
-        margin: 20px auto 0;
+        margin: 0px auto 0;
+        padding-bottom: 100px;
         width: 1190px;
         @media (max-width: 1200px) {
             width: 800px;
