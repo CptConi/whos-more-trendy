@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <div :style="getStyle">
         <div class="score__container">
             <h3>Score</h3>
             <div class="score__box">
                 <div class="score__panel score__panel--red">
-                    <span class="score__value">{{ score.red }}</span>
+                    <span class="score__value score__value--red">{{ score.red }}</span>
                 </div>
                 <div class="score__panel score__panel--blue">
-                    <span class="score__value">{{ score.blue }}</span>
+                    <span class="score__value score__value--blue">{{ score.blue }}</span>
                 </div>
             </div>
         </div>
@@ -16,17 +16,22 @@
 
 <script>
 import { mapState } from 'vuex';
+import ThemeManager from '../services/theme';
 export default {
     name: 'Score',
     computed: {
-        ...mapState(['score']),
+        ...mapState(['score', 'theme']),
+        getStyle() {
+            return ThemeManager.getStyle(this);
+        },
+        appTheme() {
+            return ThemeManager.appTheme(this);
+        },
     },
 };
 </script>
 
 <style lang="scss">
-$redTeam: #f44336;
-$blueTeam: #2196f3;
 .score__container {
     & h3 {
         position: absolute;
@@ -36,7 +41,8 @@ $blueTeam: #2196f3;
         transform: translatex(-50%);
         font-size: 28px;
         font-family: 'Pacifico', sans-serif;
-        background: linear-gradient(to top, #eee 17%, transparent 17%);
+        color: var(--app-font-color);
+        background: linear-gradient(to top, var(--app-secondary-color) 17%, transparent 17%);
         padding: 0 22px;
         border-radius: 12px;
     }
@@ -46,7 +52,7 @@ $blueTeam: #2196f3;
     left: calc(50% - 150px);
     width: 300px;
     height: 50px;
-    background-color: #546e7a;
+    background-color: var(--app-primary-color);
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
     @media (max-width: 1250px) {
@@ -73,15 +79,15 @@ $blueTeam: #2196f3;
         width: 100px;
         height: 50px;
         &--red {
-            border-radius: 12px;
-            background: linear-gradient(to right, $redTeam, transparent 75%);
+            border-radius: 12px 0px 0 12px;
+            background: linear-gradient(to right, var(--team1-color) 60%, transparent);
             @media (max-width: 900px) {
                 height: 45px;
             }
         }
         &--blue {
-            border-radius: 12px;
-            background: linear-gradient(to left, $blueTeam, transparent 75%);
+            border-radius: 0 12px 12px 0;
+            background: linear-gradient(to left, var(--team2-color) 60%, transparent);
             @media (max-width: 900px) {
                 height: 45px;
             }
@@ -89,8 +95,15 @@ $blueTeam: #2196f3;
     }
     & .score__value {
         font-size: 34px;
-        color: white;
         font-weight: 900;
+        &--red {
+            color: var(--team1-font);
+            text-align: left;
+        }
+        &--blue {
+            color: var(--team2-font);
+            text-align: right;
+        }
         @media (max-width: 900px) {
             font-size: 30px;
         }

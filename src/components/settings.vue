@@ -11,7 +11,7 @@
                         :switch-color="{ checked: '#37474F', unchecked: '#DDE1E3' }"
                         :width="70"
                         :height="30"
-                        :labels="{checked:'Dark', unchecked:'Light'}"
+                        :labels="{ checked: 'Dark', unchecked: 'Light' }"
                         v-model="applicationTheme"
                     ></toggle-button>
                 </div>
@@ -38,7 +38,7 @@ export default {
     components: { VSwatches },
     data() {
         return {
-            isVisible: true,
+            isVisible: false,
         };
     },
     computed: {
@@ -66,12 +66,12 @@ export default {
                 this.$store.commit('SET_THEME_TEAM_2', value);
             },
         },
-        getStyle(){
+        getStyle() {
             return ThemeManager.getStyle(this);
         },
-        appTheme(){
+        appTheme() {
             return ThemeManager.appTheme(this);
-        }
+        },
     },
     methods: {
         showSettingsPanel() {
@@ -105,13 +105,13 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    &--colorbox{
+    &--colorbox {
         width: 50%;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-        @media(max-width: 900px){
+        @media (max-width: 900px) {
             width: 100%;
             flex-direction: column;
         }

@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content" :style='getStyle'>
         <h1 class="main-title">Who's More Trendy ?</h1>
         <FormTrends></FormTrends>
         <Help></Help>
@@ -26,6 +26,7 @@ import FormTrends from '../components/formTrends';
 import Help from '../components/help';
 import Score from '../components/score';
 import Averages from '../components/averages';
+import ThemeManager from '../services/theme';
 import { mapState } from 'vuex';
 export default {
     name: 'Home',
@@ -34,7 +35,7 @@ export default {
         return {};
     },
     computed: {
-        ...mapState(['chart', 'error', 'keyword1', 'keyword2', 'score']),
+        ...mapState(['chart', 'error', 'keyword1', 'keyword2', 'score', 'theme']),
         chartHeight() {
             if (document.body.clientWidth > 1200) {
                 return 300;
@@ -49,20 +50,24 @@ export default {
             }
             return 300;
         },
+        getStyle() {
+            return ThemeManager.getStyle(this);
+        },
+        appTheme() {
+            return ThemeManager.appTheme(this);
+        },
     },
 };
 </script>
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-$redTeam: #f44336;
-$blueTeam: #2196f3;
 
 .main-title {
     font-family: 'Pacifico', cursive;
     font-size: 70px;
-    color: Black;
-    filter: drop-shadow(0 0 3px 3px white);
+    color: var(--app-font-color);
+    text-shadow: 0 0 5px var(--app-shadow-color);
     font-weight: 200;
     transform: translateY(30px);
 
@@ -78,27 +83,6 @@ $blueTeam: #2196f3;
         transform: translateY(25px);
     }
 }
-.kw1 {
-    background-color: $redTeam;
-    text-transform: capitalize;
-    font-weight: 700;
-    margin-right: 50px;
-    padding: 20px 30px;
-    border-radius: 10px;
-    color: #f1f1f1;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-}
-.kw2 {
-    background-color: $blueTeam;
-    text-transform: capitalize;
-    font-weight: 700;
-    margin-left: 50px;
-    padding: 20px 30px;
-    border-radius: 10px;
-    color: #f1f1f1;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-}
-
 .chart {
     &__container {
         margin: 20px auto 0;

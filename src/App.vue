@@ -1,8 +1,24 @@
 <template>
-    <div id="app">
+    <div id="app" :style="getStyle">
         <router-view />
     </div>
 </template>
+
+<script>
+import {mapState} from 'vuex';
+import ThemeManager from './services/theme';
+export default {
+    computed: {
+        ...mapState(['theme']),
+        getStyle() {
+            return ThemeManager.getStyle(this);
+        },
+        appTheme() {
+            return ThemeManager.appTheme(this);
+        },
+    },
+};
+</script>
 
 <style lang="scss">
 *,
@@ -18,26 +34,17 @@ html {
     scroll-behavior: smooth;
 }
 
+body{
+    background-color: var(--app-secondary-color);
+}
+
 #app {
-    min-height: 100vh;
-    background-color: #e2e2e2;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    background-color: var(--app-secondary-color);
+    min-height: 100vh;
 }
 
-#nav {
-    padding: 30px;
-
-    a {
-        font-weight: bold;
-        color: #2c3e50;
-
-        &.router-link-exact-active {
-            color: #42b983;
-        }
-    }
-}
 </style>

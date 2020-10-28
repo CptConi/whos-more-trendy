@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :style='getStyle'>
         <div @click.prevent="showHelpPanel" id="help-btn">
             <p>Comment jouer ?</p>
         </div>
@@ -27,12 +27,23 @@
 </template>
 
 <script>
+import ThemeManager from '../services/theme';
+import {mapState} from 'vuex';
 export default {
     name: 'Help',
     data() {
         return {
             isVisible: false,
         };
+    },
+    computed: {
+        ...mapState(['theme']),
+        getStyle(){
+            return ThemeManager.getStyle(this);
+        },
+        appTheme(){
+            return ThemeManager.appTheme(this);
+        }
     },
     methods: {
         showHelpPanel() {
@@ -68,12 +79,12 @@ export default {
     max-width: 90vw;
     max-height: 90vh;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10pxvar(--app-shadow-color);
     position: fixed;
     transform: translate(-50%, -50%);
     z-index: 3;
     padding: 30px;
-    background-color: white;
+    background-color:var(--app-secondary-color);
     top: 50%;
     left: 50%;
     overflow-y: auto;
@@ -81,10 +92,12 @@ export default {
         font-size: 26px;
         font-weight: 600;
         margin: 10px auto 30px;
+        color: var(--app-font-color);
     }
     & p {
         font-size: 20px;
         padding-bottom: 14px;
+        color: var(--app-font-color);
     }
 }
 
@@ -94,10 +107,10 @@ export default {
     text-align: center;
     top: 10px;
     right: 10px;
-    padding: 2px 10px 5px;
+    padding: 5px;
     border-radius: 50px;
-    background-color: red;
-    color: white;
+    color: var(--app-font-color);
+    font-size: 45px;
     font-weight: 900;
 }
 
