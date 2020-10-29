@@ -1,5 +1,5 @@
 <template>
-    <div :style='getStyle'>
+    <div>
         <div @click.prevent="showHelpPanel" id="help-btn">
             <p>Comment jouer ?</p>
         </div>
@@ -27,23 +27,12 @@
 </template>
 
 <script>
-import ThemeManager from '../services/theme';
-import {mapState} from 'vuex';
 export default {
     name: 'Help',
     data() {
         return {
             isVisible: false,
         };
-    },
-    computed: {
-        ...mapState(['theme']),
-        getStyle(){
-            return ThemeManager.getStyle(this);
-        },
-        appTheme(){
-            return ThemeManager.appTheme(this);
-        }
     },
     methods: {
         showHelpPanel() {

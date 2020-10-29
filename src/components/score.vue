@@ -1,5 +1,5 @@
 <template>
-    <div :style="getStyle">
+    <div>
         <div class="score__container">
             <h3>Score</h3>
             <div class="score__box">
@@ -16,17 +16,10 @@
 
 <script>
 import { mapState } from 'vuex';
-import ThemeManager from '../services/theme';
 export default {
     name: 'Score',
     computed: {
-        ...mapState(['score', 'theme']),
-        getStyle() {
-            return ThemeManager.getStyle(this);
-        },
-        appTheme() {
-            return ThemeManager.appTheme(this);
-        },
+        ...mapState(['score']),
     },
 };
 </script>

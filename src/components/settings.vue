@@ -32,7 +32,6 @@
 
 <script>
 import VSwatches from 'vue-swatches';
-import ThemeManager from '../services/theme';
 export default {
     name: 'Settings',
     components: { VSwatches },
@@ -65,12 +64,6 @@ export default {
             set(value) {
                 this.$store.commit('SET_THEME_TEAM_2', value);
             },
-        },
-        getStyle() {
-            return ThemeManager.getStyle(this);
-        },
-        appTheme() {
-            return ThemeManager.appTheme(this);
         },
     },
     methods: {
@@ -132,6 +125,7 @@ export default {
 
 .equipe {
     margin: 10px auto;
+    transition: none;
 }
 
 //  Transitions ===============================

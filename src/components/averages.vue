@@ -1,5 +1,5 @@
 <template>
-    <div :style="getStyle">
+    <div>
         <div class="average__container" v-if="chart.loaded">
             <div class="average__circle average__circle--red" :class="kw1AvgAnim">
                 <div class="average__value average__value--red">
@@ -27,7 +27,6 @@
 
 <script>
 import ICountUp from 'vue-countup-v2';
-import ThemeManager from '../services/theme';
 import { mapState, mapActions } from 'vuex';
 export default {
     name: 'Averages',
@@ -56,12 +55,6 @@ export default {
                 anim = 'winner--blue';
             }
             return anim;
-        },
-        getStyle() {
-            return ThemeManager.getStyle(this);
-        },
-        appTheme() {
-            return ThemeManager.appTheme(this);
         },
     },
     methods: {

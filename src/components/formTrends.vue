@@ -1,9 +1,9 @@
 <template >
-    <div :style="getStyle">
+    <div>
         <form>
             <div class="input-container">
                 <input
-                    class="search__input"
+                    class="search__input search__input--red"
                     @keyup.enter="compareTerms"
                     placeholder="Premier terme"
                     onfocus="this.placeholder = ''"
@@ -12,7 +12,7 @@
                     v-model="keyword1"
                 />
                 <input
-                    class="search__input"
+                    class="search__input search__input--blue"
                     @keyup.enter="compareTerms"
                     placeholder="Second terme"
                     onfocus="this.placeholder = ''"
@@ -53,7 +53,6 @@
 import googleTrends from '../services/googleTrends';
 import Utils from '../services/utils';
 import Settings from '../components/settings';
-import ThemeManager from '../services/theme';
 import { mapActions } from 'vuex';
 export default {
     name: 'formTrends',
@@ -110,12 +109,6 @@ export default {
                 return this.$store.state.theme;
             },
         },
-        getStyle(){
-            return ThemeManager.getStyle(this);
-        },
-        appTheme(){
-            return ThemeManager.appTheme(this);
-        }
     },
     watch: {
         datepickerValue() {
@@ -234,7 +227,8 @@ form {
         border: none;
         outline: none;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: var(--app-secondary-color);
         text-align: center;
         text-transform: capitalize;
         font-size: 22px;
@@ -244,9 +238,9 @@ form {
             right: 20px;
             cursor: pointer;
         }
-        &:nth-child(1) {
+        &--red {
             margin-right: 2%;
-            background-color: var(--team1-color);
+            border: 1px solid var(--team1-color);
             color: var(--team1-font);
             &::placeholder {
                 color: var(--team1-font);
@@ -267,9 +261,9 @@ form {
                 width: 270px;
             }
         }
-        &:nth-child(2) {
+        &--blue {
             margin-left: 2%;
-            background-color: var(--team2-color);
+            border:1px solid var(--team2-color);
             color: var(--team2-font);
             &::placeholder {
                 color: var(--team2-font);
