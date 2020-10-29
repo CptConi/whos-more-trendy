@@ -1,4 +1,4 @@
-<template >
+<template>
     <div>
         <form>
             <div class="input-container">
@@ -187,9 +187,6 @@ export default {
     },
     mounted() {
         this.$store.commit('SET_PERIOD', this.$moment().subtract(10, 'days')._d);
-        let focus = document.querySelector('.search__input');
-        focus.focus();
-        focus.select();
     },
 };
 </script>
@@ -263,7 +260,7 @@ form {
         }
         &--blue {
             margin-left: 2%;
-            border:1px solid var(--team2-color);
+            border: 1px solid var(--team2-color);
             color: var(--team2-font);
             &::placeholder {
                 color: var(--team2-font);
