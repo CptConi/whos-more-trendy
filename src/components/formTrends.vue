@@ -337,10 +337,10 @@ form {
     cursor: pointer;
     border: none;
     outline: none;
-    box-shadow: 3px 3px 10px -3px var(--team1-color), -3px -3px 10px -3px var(--team2-color);
+    box-shadow: 1px 1px 10px -3px var(--team1-color), -1px -1px 10px -3px var(--team2-color);
     border-radius: 20px;
     color: var(--app-font-color);
-    background: linear-gradient(160deg, var(--team1-color), var(--team2-color));
+    background-color: var(--app-shadow-color);
     font-size: 25px;
     text-transform: capitalize;
     transition: all 0.3s ease;
