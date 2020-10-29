@@ -2,24 +2,26 @@
     <div>
         <form>
             <div class="input-container">
-                <input
-                    class="search__input search__input--red"
-                    @keyup.enter="compareTerms"
-                    placeholder="Premier terme"
-                    onfocus="this.placeholder = ''"
-                    onblur="this.placeholder = 'Premier terme'"
-                    type="search"
-                    v-model="keyword1"
-                />
-                <input
-                    class="search__input search__input--blue"
-                    @keyup.enter="compareTerms"
-                    placeholder="Second terme"
-                    onfocus="this.placeholder = ''"
-                    onblur="this.placeholder = 'Second terme'"
-                    type="search"
-                    v-model="keyword2"
-                />
+                <div class="input-group --red" :class="input1Filled">
+                    <label class="label label--red" for="kw-red">Equipe 1</label>
+                    <input
+                        id="kw-red"
+                        class="search__input search__input--red"
+                        @keyup.enter="compareTerms"
+                        type="search"
+                        v-model="keyword1"
+                    />
+                </div>
+                <div class="input-group --blue" :class="input2Filled">
+                    <label class="label label--blue" for="kw-blue">Equipe 2</label>
+                    <input
+                        id="kw-blue"
+                        class="search__input search__input--blue"
+                        @keyup.enter="compareTerms"
+                        type="search"
+                        v-model="keyword2"
+                    />
+                </div>
             </div>
             <div class="range__container">
                 <label for="datepicker" class="range__title">Période de recherche:</label>
@@ -108,6 +110,20 @@ export default {
             get() {
                 return this.$store.state.theme;
             },
+        },
+        input1Filled() {
+            if (this.keyword1 != '') {
+                return 'filled';
+            } else {
+                return null;
+            }
+        },
+        input2Filled() {
+            if (this.keyword2 != '') {
+                return 'filled';
+            } else {
+                return null;
+            }
         },
     },
     watch: {
@@ -212,24 +228,49 @@ form {
         width: 300px;
     }
 }
+.input-group {
+    position: relative;
+    & label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--app-placeholder-color);
+    }
+    &:focus-within .label,
+    &.filled .label{
+        top: -12px;
+        font-weight: 700;
+        transform: translate(0, -50%);
+        &--red {
+            left: 10px;
+            color: var(--team1-color);
+        }
+        &--blue {
+            left: calc(2% + 10px);
+            color: var(--team2-color);
+            @media(max-width:650px){
+                left: 10px;
+            }
+        }
+    }
+}
 
 .input-container {
-    margin: 30px 0;
+    margin: 35px 0;
     display: flex;
     justify-content: center;
     align-items: center;
     & .search__input {
-        width: 40%;
+        display: block;
+        width: 460px;
         height: 60px;
-        border: none;
         outline: none;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
         background-color: var(--app-secondary-color);
         text-align: center;
         text-transform: capitalize;
         font-size: 22px;
-        transform: all 0.2s ease;
         &::-webkit-search-cancel-button {
             position: relative;
             right: 20px;
@@ -238,51 +279,49 @@ form {
         &--red {
             margin-right: 2%;
             border: 1px solid var(--team1-color);
-            color: var(--team1-font);
-            &::placeholder {
-                color: var(--team1-font);
-                font-size: 22px;
-            }
+            color: var(--app-font-color);
+            transition: border 0.2s linear;
             &:focus {
-                box-shadow: 0 0 20px var(--team1-color);
-            }
-            &:hover {
-                transform: scale(1.02);
-            }
-            @media (max-width: 650px) {
-                margin: auto;
-                width: 380px;
-                margin-bottom: 8px;
-            }
-            @media (max-width: 450px) {
-                width: 270px;
+                border-bottom: 3px solid var(--team1-color);
+                border-top: 3px solid transparent;
+                border-right: 3px solid transparent;
+                border-left: 3px solid transparent;
+                border-radius: 5px 5px 0 0;
             }
         }
         &--blue {
             margin-left: 2%;
             border: 1px solid var(--team2-color);
-            color: var(--team2-font);
-            &::placeholder {
-                color: var(--team2-font);
-                font-size: 22px;
-            }
+            color: var(--app-font-color);
+            transition: border 0.2s linear;
             &:focus {
-                box-shadow: 0 0 20px var(--team2-color);
-            }
-            &:hover {
-                transform: scale(1.02);
-            }
-            @media (max-width: 650px) {
-                margin: auto;
-                width: 380px;
-            }
-            @media (max-width: 450px) {
-                width: 270px;
+                border: 3px solid var(--team2-color);
+                border-top: 3px solid transparent;
+                border-right: 3px solid transparent;
+                border-left: 3px solid transparent;
+                border-radius: 5px 5px 0 0;
             }
         }
+        @media(max-width: 1200px){
+            width: 340px;
+        }
+        @media(max-width: 900px){
+            width: 250px;
+        }
+        @media(max-width: 650px){
+            margin: auto;
+            width: 350px;
+        }
+        @media(max-width: 450px){
+            width: 250px;
+        }
+
+
     }
     @media (max-width: 650px) {
+        height: 150px;
         flex-direction: column;
+        justify-content: space-between;
     }
 }
 

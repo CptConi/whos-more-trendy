@@ -48,7 +48,7 @@ export default {
     border-radius: 10px;
     background-color: white;
     border: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px var(--app-shadow-color);
     padding: 15px 10px;
     width: 150px;
     margin: 50px auto 0;
