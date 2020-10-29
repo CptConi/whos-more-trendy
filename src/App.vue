@@ -13,9 +13,6 @@ export default {
         getStyle() {
             return ThemeManager.getStyle(this);
         },
-        appTheme() {
-            return ThemeManager.appTheme(this);
-        },
     },
 };
 </script>
