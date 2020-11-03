@@ -1,6 +1,7 @@
 <template>
     <div>
         <form>
+            <div class="input__help">Chaque joueur écrit le mot-clé qui lui semble le plus recherché :</div>
             <div class="input-container">
                 <div class="input-group --red" :class="input1Filled">
                     <label class="label label--red" for="kw-red">Equipe 1</label>
@@ -256,8 +257,13 @@ form {
     }
 }
 
+.input__help{
+    margin-top: 35px;
+    color: var(--app-font-color);
+}
+
 .input-container {
-    margin: 35px 0;
+    margin: 25px 0 35px;
     display: flex;
     justify-content: center;
     align-items: center;

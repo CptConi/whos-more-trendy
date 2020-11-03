@@ -6,6 +6,7 @@ var lightSecondary = '#DDE1E3';
 var lightFont = '#000000';
 var lightPlaceholder = '#888888';
 var lightShadow = Utils.LightenDarkenColor(lightPrimary, -30);
+// var lightHint = '#9AD1D4';
 
 // Dark Theme
 var darkPrimary = '#37474F';
@@ -13,6 +14,7 @@ var darkSecondary = '#212b30';
 var darkFont = '#E0ECF6';
 var darkPlaceholder = '#AAA';
 var darkShadow = Utils.LightenDarkenColor(darkPrimary, +20);
+// var darkHint = '';
 
 export default {
     getStyle(Vue) {
